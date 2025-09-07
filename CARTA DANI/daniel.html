@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+
+<head>
+    <title> CARTA DE ADMISIÓN </title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+ 
+</head>
+
+<body>
+
+    <canvas id="stars"></canvas>
+
+  
+    <div  class="boleto3" > 
+      
+        <div class="boleto-carta">
+         <!-- <h6>¿Qué talll? ¿Te gustó?</h6>
+          <h6>Jajaja espero que sí, una manera diferente de hacer las cosas. </h6>
+          <h6>Danii, Feliz cumpleañosssss!!! Que Dios te bendiga muchote, que este nuevo año este lleno de prosperidad y abundancia para ti, 
+          que no te falte salud ni bendiciones ningún día de tu vida, que siempre estés rodeado de las personas que te quieren y valoran. 
+          Te deseo todo lo bonito del mundo, te deseo una vida feliz y plena.</h6>
+          <h6>Que sea un día asombroso para ti, eres un hombre maravilloso, trabajador e inteligente y con muchass otras cualidades más. 
+          </h6>
+          <h6>Gracias por cada momento compartido y por todo en general.<br>Daniel, eres todos los colores a toda intensidad.
+          <br> Felicessss 33!! Y que sean muchosss más ♡.</h6>
+          <h6 class="final">Con cariño</h6>
+          <h6 class="final">K 💎</h6> -->
+          
+        </div>
+    </div>
+
+            
+    </div>
+
+
+    
+
+    <script>
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+
+let stars = [];
+
+// Colores personalizados
+const colors = ['#ff0000', '#0000ff', '#ffff00', '#00ff00'];
+
+// Inicializar canvas y estrellas
+function init() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  stars = [];
+  for(let i = 0; i < 200; i++){
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 3 + 2,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      alpha: Math.random(),
+      delta: Math.random() * 0.02
+    });
+  }
+}
+
+window.addEventListener('resize', init);
+init();
+
+// Función para dibujar una estrella de 5 puntas
+function drawStar(x, y, r, spikes, color, alpha) {
+  let rot = Math.PI / 2 * 3;
+  let cx = x;
+  let cy = y;
+  let step = Math.PI / spikes;
+
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - r);
+  for(let i = 0; i < spikes; i++){
+    let x1 = cx + Math.cos(rot) * r;
+    let y1 = cy + Math.sin(rot) * r;
+    ctx.lineTo(x1, y1);
+    rot += step;
+
+    let x2 = cx + Math.cos(rot) * (r/2);
+    let y2 = cy + Math.sin(rot) * (r/2);
+    ctx.lineTo(x2, y2);
+    rot += step;
+  }
+  ctx.lineTo(cx, cy - r);
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.globalAlpha = alpha;
+  ctx.fill();
+  ctx.globalAlpha = 1;
+}
+
+// Animación de parpadeo
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(star => {
+    drawStar(star.x, star.y, star.r, 5, star.color, star.alpha);
+    star.alpha += star.delta;
+    if(star.alpha > 1 || star.alpha < 0.1) star.delta *= -1; // parpadeo
+  });
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+
+
+</html>

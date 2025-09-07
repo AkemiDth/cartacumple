@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+
+<head>
+    <title> CARTA DE ADMISIÓN </title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+ 
+</head>
+
+<body>
+
+    <canvas id="stars"></canvas>
+
+
+    <div class="primer_card">
+
+              <h4>Me pronuncian y el péndulo se detiene,</h4>
+              <h4>no pide sangre ni deja rastro,</h4>
+              <h4>soy sentencia sin juicio,</h4>
+              <h4>no hay herida que no me nombre</h4>
+              <h4>ni remedio que me devuelva.</h4>
+             
+              
+          </div>
+
+<!-- ESPACIO CONTRASEÑA-->
+    
+  <div class="wrapper">
+    <div class="pwd-box">
+      <input id="pwd" class="pwd-input" type="password" placeholder="Escribe la contraseña" />
+      <button class="toggle" id="toggle">👁️</button>
+      <button class="pwd-btn" id="checkBtn">Comprobar</button>
+      <span id="badge" class="badge" aria-live="polite">—</span>
+    </div>
+  </div>
+
+<script>
+  // Cambia aquí la contraseña correcta
+  const PASSWORD_CORRECTA = "Avada Kedavra";
+
+  const input = document.getElementById("pwd");
+  const badge = document.getElementById("badge");
+  const checkBtn = document.getElementById("checkBtn");
+  const toggle = document.getElementById("toggle");
+
+  function actualizarBadge(ok){
+    if (ok === null){
+      badge.textContent = "—";
+      badge.className = "badge";
+      return;
+    }
+    if (ok){
+      badge.textContent = "Correcta = 7 ";
+      badge.className = "badge ok";
+    } else {
+      alert('No hay pistas. Te vas a ganar un boleto directo a Azkaban 🧙‍♂️🏰');
+    }
+  }
+
+  function validar(){
+    const ok = input.value === PASSWORD_CORRECTA;
+    actualizarBadge(ok);
+  }
+
+  // Comprobar al hacer clic
+  checkBtn.addEventListener("click", validar);
+
+  // Comprobar al presionar Enter
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") validar();
+  });
+
+  // Limpiar letrero si borras
+  input.addEventListener("input", () => {
+    if (!input.value) actualizarBadge(null);
+  });
+
+  // Ver / ocultar contraseña
+  toggle.addEventListener("click", () => {
+    input.type = input.type === "password" ? "text" : "password";
+    toggle.textContent = input.type === "password" ? "👁️" : "🙈";
+  });
+</script>
+
+<!-- FIN DE LA CONTRASEÑA -->
+
+    <script>
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+
+let stars = [];
+
+// Colores personalizados
+const colors = ['#ff0000', '#0000ff', '#ffff00', '#00ff00'];
+
+// Inicializar canvas y estrellas
+function init() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  stars = [];
+  for(let i = 0; i < 200; i++){
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 3 + 2,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      alpha: Math.random(),
+      delta: Math.random() * 0.02
+    });
+  }
+}
+
+window.addEventListener('resize', init);
+init();
+
+// Función para dibujar una estrella de 5 puntas
+function drawStar(x, y, r, spikes, color, alpha) {
+  let rot = Math.PI / 2 * 3;
+  let cx = x;
+  let cy = y;
+  let step = Math.PI / spikes;
+
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - r);
+  for(let i = 0; i < spikes; i++){
+    let x1 = cx + Math.cos(rot) * r;
+    let y1 = cy + Math.sin(rot) * r;
+    ctx.lineTo(x1, y1);
+    rot += step;
+
+    let x2 = cx + Math.cos(rot) * (r/2);
+    let y2 = cy + Math.sin(rot) * (r/2);
+    ctx.lineTo(x2, y2);
+    rot += step;
+  }
+  ctx.lineTo(cx, cy - r);
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.globalAlpha = alpha;
+  ctx.fill();
+  ctx.globalAlpha = 1;
+}
+
+// Animación de parpadeo
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(star => {
+    drawStar(star.x, star.y, star.r, 5, star.color, star.alpha);
+    star.alpha += star.delta;
+    if(star.alpha > 1 || star.alpha < 0.1) star.delta *= -1; // parpadeo
+  });
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+
+
+</html>

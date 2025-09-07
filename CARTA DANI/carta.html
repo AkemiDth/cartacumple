@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+
+<head>
+    <title> CARTA DE ADMISIÓN </title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+ 
+</head>
+
+<body>
+
+    <canvas id="stars"></canvas>
+
+
+
+
+    <div class="boleto1"> 
+        <div class="boleto-texto">
+          <!--<h6>Querido sr Avila Segura:</h6>
+          <h6>Tenemos el placer de informarle que ha sido aceptado en la escuela Hogwarts de Magia 
+          y Hechicería desde hace varios años, pero por problemas administrativos
+          (nuestras lechuzas a veces tienen sus propios caprichos), esta carta apenas le llega a usted,
+          pero no se preocupe: su lugar en Hogwarts está asegurado.</h6>
+
+          <h6>Adjuntamos la lista del equipo y de los libros necesarios para el curso. Las clases comienzan oficialmente el 1 de septiembre, pero le estaremos esperando para que se una lo antes posible. Así que no se preocupe si esta un poco retrasado. Le pedimos que nos envie su lechuza de confirmación en cuanto reciba esta carta.
+          Confiamos en que, a pesar de este inusual inicio, su paso por Hogwarts será tan mágico como debe ser.</h6>
+          <h6 class="final">Atentamente,<br>Minerva McGonagall, Directora del Colegio Hogwarts de Magia y Hechicería.</h6> -->
+          
+        </div>
+    </div>
+
+    <!-- <div  class="boleto1"> 
+            <img src="escrito.jpg" alt="boleto1" class="boletoa-img">
+            <div class="boleto-texto">
+            <h6>Querido sr Avila Segura:</h6>
+            <h6>Tenemos el placer de informarle que ha sido aceptado en la escuela Hogwarts de Magia y Hechicería desde hace varios años, pero por problemas administrativos (nuestras lechuzas a veces tienen sus propios caprichos), esta carta apenas le llega a usted, pero no se preocupe: su lugar en Hogwarts está asegurado.</h6>
+            <h6>Adjuntamos la lista del equipo y de los libros necesarios para el curso. Las clases comienzan oficialmente el 1 de septiembre, pero le estaremos esperando para que se una lo antes posible. Así que no se preocupe si esta un poco retrasado. Le pedimos que nos envie su lechuza de confirmación en cuanto reciba esta carta.
+Confiamos en que, a pesar de este inusual inicio, su paso por Hogwarts será tan mágico como debe ser.</h6>
+              <h6>Atentamente,
+Minerva McGonagall, Directora del Colegio Hogwarts de Magia y Hechicería.</h6>
+
+  </div>
+         
+    </div> -->
+
+   
+      <div class="letrero">
+        Usa tu boleto!!!🚂⏳
+      </div>
+
+
+    <div  class="boleto2" onclick="window.location.href='daniel.html'" > 
+            <img src="boletito.jpg" alt="boleto2" class="boletob-img">
+    </div>
+    
+
+    <script>
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+
+let stars = [];
+
+// Colores personalizados
+const colors = ['#ff0000', '#0000ff', '#ffff00', '#00ff00'];
+
+// Inicializar canvas y estrellas
+function init() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  stars = [];
+  for(let i = 0; i < 200; i++){
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 3 + 2,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      alpha: Math.random(),
+      delta: Math.random() * 0.02
+    });
+  }
+}
+
+window.addEventListener('resize', init);
+init();
+
+// Función para dibujar una estrella de 5 puntas
+function drawStar(x, y, r, spikes, color, alpha) {
+  let rot = Math.PI / 2 * 3;
+  let cx = x;
+  let cy = y;
+  let step = Math.PI / spikes;
+
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - r);
+  for(let i = 0; i < spikes; i++){
+    let x1 = cx + Math.cos(rot) * r;
+    let y1 = cy + Math.sin(rot) * r;
+    ctx.lineTo(x1, y1);
+    rot += step;
+
+    let x2 = cx + Math.cos(rot) * (r/2);
+    let y2 = cy + Math.sin(rot) * (r/2);
+    ctx.lineTo(x2, y2);
+    rot += step;
+  }
+  ctx.lineTo(cx, cy - r);
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.globalAlpha = alpha;
+  ctx.fill();
+  ctx.globalAlpha = 1;
+}
+
+// Animación de parpadeo
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(star => {
+    drawStar(star.x, star.y, star.r, 5, star.color, star.alpha);
+    star.alpha += star.delta;
+    if(star.alpha > 1 || star.alpha < 0.1) star.delta *= -1; // parpadeo
+  });
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+
+
+</html>

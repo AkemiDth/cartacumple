@@ -1,0 +1,389 @@
+
+/* FONT SPACE */
+
+@font-face {
+  font-family: 'Pristina';
+  src: url('ruta/a/pristina.ttf') format('truetype');
+}
+
+
+/* STARS BACKGROUND */
+
+ #stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;        /* FONDO */   
+    pointer-events: none;  
+  }
+
+
+/* EDIT GEN BODY */
+
+body {
+    margin: 50px;   
+    background-color: #000;
+    font-family: 'Pristina', cursive;
+    
+}
+
+
+/* SPACE HECHIZO ANIMATION */
+
+.hechizo-container {
+  display: flex;            /* pone imagen y card en fila */
+  align-items: center;      /* los centra verticalmente */
+  justify-content: center;  /* opcional: los centra en la pantalla */
+  gap: 20px;                /* espacio entre gif y card */
+  margin: 40px;             /* separa del borde */
+}
+
+.hechizo-img {
+  width: 400px;
+  max-width: 100%;          /* evita que se corte si la pantalla es pequeña */
+}
+
+.hechizogf1 {
+
+  max-width: 100%;
+  max-height: 100%;
+
+
+}
+
+
+/* HECHIZO 2 MITAD */ 
+
+.hechizogf2 {
+
+  margin-top: 50px;
+
+
+}
+
+/* IMAGEN HOOVER 1 */
+
+.hechizocart-img {
+
+  max-width: 70%;
+  margin: 20px;
+  padding: 20px;
+
+
+}
+
+.hechizo-card {
+  background: rgba(245, 245, 220, 0.5);
+  padding: 7px;
+  color: #000;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  width: 300px;
+  height: 450px;
+}
+
+
+/* ESPACIO LETRA TITULO CENTRAL */
+
+p {
+    color: #ffffff;
+    padding: 5px;
+    text-align: center;
+    font-weight: 100px;
+    font-size: 50px;
+
+
+}
+
+/* ESPACIO LETRA CARTA WEB CENTRAL */
+
+h2 {
+
+    color: #ffffff;
+    padding: 20px;
+    margin: 100px;
+    font-weight: 200px;
+    font-size: 50px;
+
+
+}
+
+/* ESPACIO LETRA PARA TITULOS WEB SECUNS */
+
+h3 {
+  
+    color: #ffffff;
+    padding: 20px;
+    margin: 100px;
+    font-weight: 200px;
+    font-size: 50px;
+
+}
+
+
+/* ESPACIO LETRA TEXTOS WEBS SECUNS */
+
+h4 {
+
+    color: #ffffff;
+    font-size: 50px;
+    text-align: center;
+
+}
+
+/* ESPACIO DE CONTENEDOR CARD */ 
+.cards {
+  perspective: 500px;
+  display: flex;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  font-family: 'Pristina', cursive;
+  justify-content: center;
+
+}
+
+/* EDICION CARD 1 = DAME EDIT FR 3 */ 
+
+.card {
+  
+  width: 200px;
+  height: 250px;
+  background: #c9b77d, 0.9;
+  opacity: 100%;
+  border-radius: 4px;
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform .5s;
+  font-family: 'Pristina', cursive;
+
+}
+
+.card:hover {
+  transform: translateZ(10px) rotateX(20deg) rotateY(20deg);
+  font-family: 'Pristina', cursive;
+}
+
+.card_title {
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  transition: transform .5s;
+  font-family: 'Pristina', cursive; /* funciones separadas de font*/
+  font-weight: 700;                             
+  font-size: 50px;                              
+  text-shadow: -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+}
+
+.card:hover .card_title {
+  transform: translateZ(50px);
+  font-family: 'Pristina', cursive;
+}
+
+/* EDICION KEY */ 
+
+    .active {
+      display: flex;
+    }
+    .password-screen {
+      flex-direction: column;
+    }
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 60px);
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+    .key {
+      background-color: #b6c9cc, 0.99;
+      border: none;
+      border-radius: 10px;
+      font-size: 20px;
+      padding: 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .key:hover {
+      background-color: #a7c7d6, 0.9;
+    }
+    .input-display {
+      font-size: 30px;
+      text-align: center;
+      letter-spacing: 15px;
+    }
+    .notepad {
+      background-color: #e7fbfd;
+      border: 10px solid #93cff1;
+      padding: 20px;
+      border-radius: 20px;
+      
+      max-width: 700px;
+      text-align: left;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      line-height: 1.6;
+    }
+
+    h5 {
+
+      text-align: center;
+      font-size: 30px;
+
+
+    }
+
+/* STYLE DEL BOTON CONTRASEÑAS */
+
+.pwd-box{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: system-ui, sans-serif;
+  }
+
+  .pwd-input{
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+  }
+  .pwd-input:focus{ border-color: #7aa2ff; }
+
+  .pwd-btn{
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 8px;
+    background: #4f46e5;
+    color: white;
+    cursor: pointer;
+  }
+
+  /* El letrero chiquito */
+  .badge{
+    min-width: 90px;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 999px;
+    background: #eee;
+    color: #333;
+    border: 1px solid #ddd;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .badge.ok{
+    background: #e8f7ee;
+    color: #106a35;
+    border-color: #bfe6cd;
+  }
+  .badge.err{
+    background: #fde8e8;
+    color: #991b1b;
+    border-color: #f5c2c2;
+  }
+
+  /* Opcional: botón para ver/ocultar contraseña */
+  .toggle{
+    background: transparent;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+
+  .wrapper {
+  display: grid;
+  place-items: center; /* centra en ambos ejes */
+  height: 100%;
+}
+
+
+/* EDICION CARTAS FINALES */
+
+.boleto1 {
+  width: 55%;
+  aspect-ratio: 2/3; /* mantiene proporción de la imagen */
+  margin: 0 auto;
+
+  background-image: url('escrito.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+
+}
+
+ /* .boletoa-img {
+
+  width: 100%;      
+  height: 100%;     
+  object-fit: cover; 
+  display: block;    
+
+}  */
+
+.boleto-texto {
+  padding-top: 90px;
+  position: absolute;   /* se coloca encima de la imagen */
+  top: 88%;             /* centro vertical */
+  left: 50%;            /* centro horizontal */
+  transform: translate(-50%, -50%); /* centra exacto */
+  
+  color: rgb(0, 0, 0);         /* texto visible */
+   font-size: clamp(8px, 3vw, 30px);
+  font-family: 'Pristina', cursive;
+  /* text-shadow: 2px 2px 5px black; /* mejora la visibilidad */
+  text-align: center;
+}
+
+
+.letrero {
+  margin-top: 20px; /* espacio entre el div de arriba y el letrero */
+  text-align: center; /* centra el texto en el ancho disponible */
+  font-family: 'Pristina', cursive; /* tipografía */
+  font-size: 35px; /* tamaño del texto */
+  color: white; /* texto blanco */
+}
+
+
+
+.boleto2 {
+
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;    /* ocupa todo el ancho */
+  height: 90vh;   /* 90% del alto de la ventana */
+
+}
+
+.boleto3 {
+
+  width: 55%;
+  aspect-ratio: 2/3; /* mantiene proporción de la imagen */
+  margin: 0 auto;
+
+  background-image: url('cartita.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+
+}
+
+
+

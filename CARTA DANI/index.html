@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<head>
+    <title> CARTA DE ADMISIÓN </title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+ 
+</head>
+
+<body>
+
+    <p>SERÁS  TÚ  EL  ELEGIDO?</p>
+    
+    <canvas id="stars"></canvas>
+   
+    <!-- CUERPO CARDS-->
+
+     <div class="cards"
+        style="padding: 10px; margin: 50px;"
+    >
+        <figure class="card">
+
+          <figcaption class="card_title" > </figcaption>
+          <div  class="hechizogf1" onclick="window.location.href='hechizo1.html'" > 
+            <img src="bella1.jpg" alt="Hechizocart" class="hechizo-img">
+          </div>
+          
+              
+        </figure>
+
+        <figure class="card">
+
+          <figcaption class="card_title"> </figcaption>
+          <div class="hechizogf2" onclick="window.location.href='hechizo2.html'"  > 
+            <img src="img2.png" alt="Hechizo" class="hechizo-img">
+          </div>
+
+
+        </figure>
+
+        <figure class="card">
+
+
+          <figcaption class="card_title"> </figcaption>
+          <div class="hechizogf3" onclick="window.location.href='hechizo3.html'" > 
+            <img src="voldi3.jpg" alt="Hechizo" class="hechizo-img">
+          </div>
+
+
+        </figure>
+
+    </div>
+
+    </div>
+
+    <div class="hechizo-container">
+        <img src="harry.gif" alt="Hechizo" class="hechizo-img">
+
+          <div class="hechizo-card">
+
+            <div id="passwordScreen" class="screen password-screen active">
+                  <h5> CONTRASEÑA </h5>
+                  <div class="input-display" id="inputDisplay">•••</div>
+                  <div class="keypad">
+                   <button class="key" onclick="enterDigit('1')">1</button>
+                    <button class="key" onclick="enterDigit('2')">2</button>
+                    <button class="key" onclick="enterDigit('3')">3</button>
+                    <button class="key" onclick="enterDigit('4')">4</button>
+                    <button class="key" onclick="enterDigit('5')">5</button>
+                    <button class="key" onclick="enterDigit('6')">6</button>
+                    <button class="key" onclick="enterDigit('7')">7</button>
+                    <button class="key" onclick="enterDigit('8')">8</button>
+                    <button class="key" onclick="enterDigit('9')">9</button>
+                    <div></div>
+                    <button class="key" onclick="enterDigit('0')">0</button>
+                  <div></div>
+                </div>
+            </div>
+             
+
+
+          </div>
+    </div>
+
+    <script>
+  const correctPassword = '537';
+  let input = '';
+  function enterDigit(digit) {
+    if (input.length < 3) {
+      input += digit;
+    }
+    const display = document.getElementById('inputDisplay');
+    display.textContent = input.padEnd(3, '•');
+    if (input.length === 3) {
+      if (input === correctPassword) {
+          window.location.href = "carta.html"; // redirige a la nueva página
+        } else {
+        alert('No hay pistas. Te vas a ganar un boleto directo a Azkaban');
+        input = '';
+        display.textContent = '•••';
+      }
+    }
+  }
+</script>
+
+
+    
+
+    <script>
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+
+let stars = [];
+
+// Colores personalizados
+const colors = ['#ff0000', '#0000ff', '#ffff00', '#00ff00'];
+
+// Inicializar canvas y estrellas
+function init() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  stars = [];
+  for(let i = 0; i < 200; i++){
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 3 + 2,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      alpha: Math.random(),
+      delta: Math.random() * 0.02
+    });
+  }
+}
+
+window.addEventListener('resize', init);
+init();
+
+// Función para dibujar una estrella de 5 puntas
+function drawStar(x, y, r, spikes, color, alpha) {
+  let rot = Math.PI / 2 * 3;
+  let cx = x;
+  let cy = y;
+  let step = Math.PI / spikes;
+
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - r);
+  for(let i = 0; i < spikes; i++){
+    let x1 = cx + Math.cos(rot) * r;
+    let y1 = cy + Math.sin(rot) * r;
+    ctx.lineTo(x1, y1);
+    rot += step;
+
+    let x2 = cx + Math.cos(rot) * (r/2);
+    let y2 = cy + Math.sin(rot) * (r/2);
+    ctx.lineTo(x2, y2);
+    rot += step;
+  }
+  ctx.lineTo(cx, cy - r);
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.globalAlpha = alpha;
+  ctx.fill();
+  ctx.globalAlpha = 1;
+}
+
+// Animación de parpadeo
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(star => {
+    drawStar(star.x, star.y, star.r, 5, star.color, star.alpha);
+    star.alpha += star.delta;
+    if(star.alpha > 1 || star.alpha < 0.1) star.delta *= -1; // parpadeo
+  });
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+
+
+</html>
